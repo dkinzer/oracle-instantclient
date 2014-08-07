@@ -38,62 +38,62 @@ class TestAlienConverter < MiniTest::Test
     @provider = MockProvider.new resource, nil
   end
 
-  def test_log_convert_file_exists
+  def test_alien_log_convert_file_exists
     File.stub :exists?, true do
       message = 'Converted package present - /foo/bar/fake-package_1.2.3.4-0_amd64.deb'
       expected = Chef::Log.info(message)
-      actual = @provider.log_convert
+      actual = @provider.alien_log_convert
       assert_equal expected, actual
     end
   end
 
-  def test_log_convert_not_file_exists
+  def test_alien_log_convert_not_file_exists
     File.stub :exists?, false do
       expected = 'alien fake-package-1.2.3.4-0.x86_64.rpm'
-      actual = @provider.log_convert
+      actual = @provider.alien_log_convert
       assert_equal expected, actual
     end
   end
 
-  def test_convert
+  def test_alien_convert
     expected = 'alien fake-package-1.2.3.4-0.x86_64.rpm'
-    actual = @provider.convert
+    actual = @provider.alien_convert
     assert_equal expected, actual
   end
 
-  def test_command
+  def test_alien_command
     expected = 'alien fake-package-1.2.3.4-0.x86_64.rpm'
-    actual = @provider.convert
+    actual = @provider.alien_convert
     assert_equal expected, actual
   end
 
-  def test_package_debian_source
+  def test_alien_package_debian_source
     expected = '/foo/bar/fake-package_1.2.3.4-0_amd64.deb'
-    actual = @provider.package_debian_source
+    actual = @provider.alien_package_debian_source
     assert_equal expected, actual
   end
 
-  def test_package_version
+  def test_alien_package_version
     expected = '1.2.3.4-0'
-    actual = @provider.package_version
+    actual = @provider.alien_package_version
     assert_equal expected, actual
   end
 
-  def test_package_name
+  def test_alien_package_name
     expected = 'fake-package-1.2.3.4-0.x86_64.rpm'
-    actual = @provider.package_name
+    actual = @provider.alien_package_name
     assert_equal expected, actual
   end
 
-  def test_package_debian_name
+  def test_alien_package_debian_name
     expected = 'fake-package_1.2.3.4-0_amd64.deb'
-    actual = @provider.package_debian_name
+    actual = @provider.alien_package_debian_name
     assert_equal expected, actual
   end
 
-  def test_package_directory
+  def test_alien_package_directory
     expected = '/foo/bar'
-    actual = @provider.package_directory
+    actual = @provider.alien_package_directory
     assert_equal expected, actual
   end
 end
