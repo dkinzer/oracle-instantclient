@@ -27,7 +27,6 @@ remote_file File.join(Chef::Config[:file_cache_path], node['oracle-instantclient
 end
 
 alien_convert File.join(Chef::Config[:file_cache_path], node['oracle-instantclient']['sqlplus-rpm']) do
-  action :install
   only_if { platform_family? 'debian' }
 end
 
