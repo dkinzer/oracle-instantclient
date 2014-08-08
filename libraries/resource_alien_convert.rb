@@ -39,6 +39,11 @@ class Chef
           :kind_of => String
         )
       end
+
+      # This private method is getting called by super.
+      def sentinel_file_if_exists
+        false
+      end
     end
   end
 end
