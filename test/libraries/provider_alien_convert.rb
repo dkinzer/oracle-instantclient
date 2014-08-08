@@ -22,7 +22,7 @@ require_relative '../../libraries/provider_alien_convert'
 
 # Override the shell_out method.
 class Chef::Provider::AlienConvert
-  def shell_out!(command, options = [])
+  def shell_out!(command, opts = [])
     command
   end
 
@@ -46,7 +46,7 @@ class TestProviderAlienConvert < MiniTest::Test
   end
 
   def test_command_initialization
-    expected = 'alien fake-package-1.2.3.4-0.x86_64.rpm'
+    expected = 'cd /foo/bar && alien fake-package-1.2.3.4-0.x86_64.rpm'
     actual = @provider.new_resource.command
     assert_equal expected, actual
   end

@@ -16,13 +16,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+# Override the shell_out method.
+#
 require 'minitest/autorun'
 require 'chef/resource/dpkg_package'
 require_relative '../../libraries/provider_alien_dpkg'
 
-# Override the shell_out method.
+# Override shell_out method.
 class Chef::Provider::AlienDpkg
-  def shell_out!(command, options = [])
+  def shell_out!(command, opts = [])
     command
   end
 end
@@ -30,13 +32,13 @@ end
 # Unit tests for Chef::Provider::AlienConvert
 class TestProviderAlienDpkg < MiniTest::Test
   def setup
-    resource = Chef::Resource::DpkgPackage.new 'A-fake-rpm-package'
-    resource.source '/foo/bar/fake-package-1.2.3.4-0.x86_64.rpm'
-    @provider = Chef::Provider::AlienDpkg.new resource, nil
+    new_resource = Chef::Resource::DpkgPackage.new 'A-fake-rpm-package'
+    new_resource.source '/foo/bar/fake-package12.1-basic-12.2.3.4.5-0.x86_64.rpm'
+    @provider = Chef::Provider::AlienDpkg.new new_resource, nil
   end
 
   def test_source_initialization
-    expected = '/foo/bar/fake-package_1.2.3.4-0_amd64.deb'
+    expected = '/foo/bar/fake-package12.1-basic_12.2.3.4.5-0_amd64.deb'
     actual = @provider.new_resource.source
     assert_equal expected, actual
   end

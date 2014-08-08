@@ -34,7 +34,7 @@ class Chef
       end
 
       def alien_command
-        "alien #{alien_source_filename}"
+        "cd #{alien_package_directory} && alien #{alien_source_filename}"
       end
 
       def alien_install_command
@@ -57,7 +57,7 @@ class Chef
       end
 
       def alien_package_version
-        alien_package_source_path.match(/\w-(\d+\.)+(\d+-\d*)*/)[0].gsub(/^\w-/, '')
+        alien_package_source_path.match(/\w(-|_)(\d+\.)+(\d+-\d*)*/)[0].gsub(/^\w-/, '')
       end
 
       def alien_package_directory
@@ -65,7 +65,7 @@ class Chef
       end
 
       def alien_package_source_path
-        @new_resource.source
+        new_resource.source
       end
     end
   end

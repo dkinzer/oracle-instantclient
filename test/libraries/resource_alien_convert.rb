@@ -21,7 +21,7 @@ require_relative '../../libraries/resource_alien_convert'
 
 # Override the shell_out method.
 class Chef::Resource::AlienConvert
-  def shell_out!(command, options = [])
+  def shell_out!(command, opts = [])
     command
   end
 

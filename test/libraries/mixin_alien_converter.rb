@@ -25,7 +25,7 @@ require_relative '../../libraries/resource_alien_convert'
 class MockProvider < Chef::Provider
   include Chef::Mixin::AlienConverter
 
-  def shell_out!(command)
+  def shell_out!(command, opts = [])
     command
   end
 end
@@ -50,20 +50,20 @@ class TestAlienConverter < MiniTest::Test
 
   def test_alien_log_convert_not_file_exists
     File.stub :exists?, false do
-      expected = 'alien fake-package12.1-basic-12.2.3.4.5-0.x86_64.rpm'
+      expected = 'cd /foo/bar && alien fake-package12.1-basic-12.2.3.4.5-0.x86_64.rpm'
       actual = @provider.alien_log_convert
       assert_equal expected, actual
     end
   end
 
   def test_alien_convert
-    expected = 'alien fake-package12.1-basic-12.2.3.4.5-0.x86_64.rpm'
+    expected = 'cd /foo/bar && alien fake-package12.1-basic-12.2.3.4.5-0.x86_64.rpm'
     actual = @provider.alien_convert
     assert_equal expected, actual
   end
 
   def test_alien_command
-    expected = 'alien fake-package12.1-basic-12.2.3.4.5-0.x86_64.rpm'
+    expected = 'cd /foo/bar && alien fake-package12.1-basic-12.2.3.4.5-0.x86_64.rpm'
     actual = @provider.alien_command
     assert_equal expected, actual
   end
