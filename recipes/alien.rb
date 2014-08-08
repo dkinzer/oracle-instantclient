@@ -24,4 +24,3 @@ package 'alien' do
   action :install
   only_if { platform_family? 'debian' }
 end
-
