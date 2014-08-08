@@ -34,7 +34,7 @@ class Chef
       end
 
       def alien_command
-        "alien #{alien_source_filename}"
+        "alien -k #{alien_source_filename}"
       end
 
       def alien_install_command

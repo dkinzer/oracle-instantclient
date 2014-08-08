@@ -46,7 +46,7 @@ class TestProviderAlienConvert < MiniTest::Test
   end
 
   def test_command_initialization
-    expected = 'alien fake-package-1.2.3.4-0.x86_64.rpm'
+    expected = 'alien -k fake-package-1.2.3.4-0.x86_64.rpm'
     actual = @provider.new_resource.command
     assert_equal expected, actual
   end
