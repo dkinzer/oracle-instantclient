@@ -29,8 +29,8 @@ class Chef
       def initialize(new_resource, run_context)
         super
         Chef::Log.info("Run Context #{run_context}")
-        @new_resource.source alien_package_debian_source
         alien_log_convert
+        @new_resource.source alien_package_debian_source
       end
     end
   end
