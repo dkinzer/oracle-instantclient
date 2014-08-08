@@ -22,6 +22,11 @@ remote_file File.join(Chef::Config[:file_cache_path], node['oracle-instantclient
   checksum node['oracle-instantclient']['basic-sha256']
 end
 
+alien_convert File.join(Chef::Config[:file_cache_path], node['oracle-instantclient']['basic-rpm']) do
+  action :install
+  only_if { platform_family? 'debian' }
+end
+
 alien_package 'oracle-instantclient12.1-basic' do
   source File.join(Chef::Config[:file_cache_path], node['oracle-instantclient']['basic-rpm'])
   action :install
