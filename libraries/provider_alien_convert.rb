@@ -34,11 +34,6 @@ class Chef
       end
 
       def action_convert
-        if sentinel_file_if_exists
-          Chef::Log.debug("#{@new_resource} sentinel file #{sentinel_file} exists - nothing to do")
-          return false
-        end
-
         converge_by("alien_convert #{@new_resource.name}") do
           shell_out!(@new_resource.command, options)
           Chef::Log.info('Alien conversion successful.')
