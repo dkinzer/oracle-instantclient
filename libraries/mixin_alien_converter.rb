@@ -34,25 +34,30 @@ class Chef
       end
 
       def alien_command
-        "alien #{alien_package_name}"
+        "alien #{alien_source_filename}"
+      end
+
+      def alien_install_command
+        shell_out!("dpkg -i #{alien_package_debian_source}")
       end
 
       def alien_package_debian_source
-        File.join(alien_package_directory, alien_package_debian_name)
+        File.join(alien_package_directory, alien_package_debian_filename)
       end
 
-      def alien_package_debian_name
-        name = String.new alien_package_name
+      def alien_package_debian_filename
+        name = String.new alien_source_filename
         version = String.new alien_package_version
+        Chef::Log.info("Version: #{version}")
         name.gsub("-#{version}.x86_64.rpm", "_#{version}_amd64.deb")
       end
 
-      def alien_package_name
+      def alien_source_filename
         File.basename(alien_package_source_path)
       end
 
       def alien_package_version
-        alien_package_source_path.match(/(\d+\.)+(\d+-\d*)*/)[0]
+        alien_package_source_path.match(/\w-(\d+\.)+(\d+-\d*)*/)[0].gsub(/^\w-/, '')
       end
 
       def alien_package_directory
@@ -60,7 +65,7 @@ class Chef
       end
 
       def alien_package_source_path
-        new_resource.source
+        @new_resource.source
       end
     end
   end
