@@ -1,5 +1,5 @@
 # Cookbook Name:: oracle-instantclient
-# Resource:: alien_converter
+# Resource:: alien_convert
 # Author:: David Kinzer <dtkinzer@gmail.com>
 #
 # Copyright (C) 2014 David Kinzer
@@ -30,7 +30,7 @@ class Chef::Resource::AlienConvert
   end
 end
 
-# Unit tests for Chef::Provider::AlienConvert
+# Unit tests for Chef::Resource::AlienConvert
 class TestResourceAlienConvert < MiniTest::Test
   def setup
     fake_rpm = '/foo/bar/fake-package-1.2.3.4-0.x86_64.rpm'
@@ -55,6 +55,13 @@ class TestResourceAlienConvert < MiniTest::Test
 
   def test_source_initialization
     expected = '/foo/bar/fake-package-1.2.3.4-0.x86_64.rpm'
+    actual = @resource.source
+    assert_equal expected, actual
+  end
+
+  def test_can_set_source
+    @resource.source 'foo'
+    expected = 'foo'
     actual = @resource.source
     assert_equal expected, actual
   end

@@ -36,7 +36,7 @@ class Chef
         set_or_return(
           :source,
           arg,
-          :king_of => String
+          :kind_of => String
         )
       end
     end
