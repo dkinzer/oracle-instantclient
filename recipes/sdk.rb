@@ -25,7 +25,7 @@ remote_file File.join(Chef::Config[:file_cache_path], node['oracle-instantclient
   action :create
 end
 
-yum_package 'oracle-instantclient12.1-devel' do
+alien_package 'oracle-instantclient12.1-devel' do
   source File.join(Chef::Config[:file_cache_path], node['oracle-instantclient']['sdk-rpm'])
   action :install
 end

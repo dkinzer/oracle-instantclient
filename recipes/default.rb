@@ -16,14 +16,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 remote_file File.join(Chef::Config[:file_cache_path], node['oracle-instantclient']['basic-rpm']) do
   source node['oracle-instantclient']['public-url'] + node['oracle-instantclient']['basic-rpm']
   action :create
   checksum node['oracle-instantclient']['basic-sha256']
 end
 
-yum_package 'oracle-instantclient12.1-basic' do
+alien_package 'oracle-instantclient12.1-basic' do
   source File.join(Chef::Config[:file_cache_path], node['oracle-instantclient']['basic-rpm'])
   action :install
 end

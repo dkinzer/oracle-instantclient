@@ -26,7 +26,7 @@ remote_file File.join(Chef::Config[:file_cache_path], node['oracle-instantclient
   action :create
 end
 
-yum_package 'oracle-instantclient12.1-sqlplus' do
+alien_package 'oracle-instantclient12.1-sqlplus' do
   source File.join(Chef::Config[:file_cache_path], node['oracle-instantclient']['sqlplus-rpm'])
   action :install
   notifies :run, 'ruby_block[update-alternatives]', :immediately
