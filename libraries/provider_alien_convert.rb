@@ -44,8 +44,8 @@ class Chef
         opts = {}
         opts[:timeout] = @new_resource.timeout || 3600
         opts[:returns] = @new_resource.returns
-        opts[:environment] = @new_resource
-        opts[:user] = @new_resource
+        opts[:environment] = @new_resource.environment
+        opts[:user] = @new_resource.user
         opts[:group] = @new_resource.group
         opts[:cwd] = @new_resource.cwd
         opts[:umask] = @new_resource.umask
