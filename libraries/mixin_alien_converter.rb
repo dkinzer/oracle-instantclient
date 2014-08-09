@@ -48,7 +48,6 @@ class Chef
       def alien_package_debian_filename
         name = String.new alien_source_filename
         version = String.new alien_package_version
-        Chef::Log.info("Version: #{version}")
         name.gsub("-#{version}.x86_64.rpm", "_#{version}_amd64.deb")
       end
 

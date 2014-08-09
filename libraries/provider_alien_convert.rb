@@ -27,7 +27,6 @@ class Chef
 
       def initialize(new_resource, run_context)
         super
-        Chef::Log.info("Run Context #{run_context}")
         @new_resource.cwd alien_package_directory
         @new_resource.command  alien_command
         @new_resource.creates alien_package_debian_source
