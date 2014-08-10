@@ -31,3 +31,4 @@ default['oracle-instantclient']['basic-sha256'] = ''
 # If this automatic attempt to deduce major version fails
 # then please set manually
 default['oracle-instantclient']['version'] = default['oracle-instantclient']['sqlplus-rpm'].split('-')[1].sub(/instantclient/, '')
+default['oracle-instantclient']['debian_packages'] = %w(alien libaio1)

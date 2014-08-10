@@ -20,7 +20,9 @@
 # @file
 # Install alien package.
 
-package 'alien' do
-  action :install
-  only_if { platform_family? 'debian' }
+node['oracle-instantclient']['debian_packages'].each do |package|
+  package package do
+    action :install
+    only_if { platform_family? 'debian' }
+  end
 end
