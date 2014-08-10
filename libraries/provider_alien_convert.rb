@@ -33,9 +33,13 @@ class Chef
       end
 
       def action_convert
+        if ::File.exists? @new_resource.creates
+          Chef::Log.info("Converted Package #{alien_package_debian_filename} exists - nothing to do")
+          return false
+        end
         converge_by("alien_convert #{@new_resource.name}") do
           shell_out!(@new_resource.command, options)
-          Chef::Log.info('Alien conversion successful.')
+          Chef::Log.info("Alien conversion successful: #{alien_package_debian_filename}.")
         end
       end
 

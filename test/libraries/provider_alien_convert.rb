@@ -58,8 +58,16 @@ class TestProviderAlienConvert < MiniTest::Test
   end
 
   def test_action_convert
-    expected = Chef::Log.info('Alien conversion successful.')
-    actual = @provider.action_convert
-    assert_equal expected, actual
+    File.stub :exists?, false do
+      expected = Chef::Log.info('Alien conversion successful.')
+      actual = @provider.action_convert
+      assert_equal expected, actual
+    end
+  end
+
+  def test_action_convert_already_converted
+    File.stub :exists?, true do
+      refute @provider.action_convert, 'Do not re-convert.'
+    end
   end
 end
